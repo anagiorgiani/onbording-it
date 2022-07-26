@@ -1,6 +1,6 @@
 # onbording-it
 
-<img src="https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842" alt="marmota golang">
+<p align="center"><img src="https://user-images.githubusercontent.com/1092882/60883564-20142380-a268-11e9-988a-d98fb639adc6.png" alt="webgo gopher" width="256px"/></p>
 
 Neste novo projeto deverá ser possível listar, os items de acordo com a rota externa.</br>
 
