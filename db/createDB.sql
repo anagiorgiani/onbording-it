@@ -1,0 +1,24 @@
+CREATE SCHEMA IF NOT EXISTS `onboarding`; DEFAULT CHARACTER SET utf8
+
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `data` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `currency` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(255) NOT NULL,
+    `codein` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `high` DECIMAL(10,2) NOT NULL,
+    `low` DECIMAL(19,4) NOT NULL,
+    `varBid` DECIMAL(19,4) NOT NULL,
+    `pctChange` DECIMAL(10,2) NOT NULL,
+    `bid` DECIMAL(10,4) NOT NULL,
+    `ask` DECIMAL(10,4) NOT NULL,
+    `timestamp` VARCHAR(255) NOT NULL,
+    `create_data` DATETIME NOT NULL,
+    PRIMARY KEY (`id`))
+ENGINE = InnoDB;
