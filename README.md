@@ -1,6 +1,6 @@
 # onbording-it
 
-<img src="/Users/agiorgiani/projects/onbording-it/img" alt="marmota golang">
+<img src="https://www.deviantart.com/quasilyte/art/Tired-gopher-783302842" alt="marmota golang">
 
 Neste novo projeto deverá ser possível listar, os items de acordo com a rota externa.</br>
 
