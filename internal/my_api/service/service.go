@@ -27,7 +27,7 @@ func (s *apiService) ProcessData(data string) (string, error) {
 	return data, nil
 }
 
-func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *sync.WaitGroup) (*[]domain.Currency, error) {
+func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *sync.WaitGroup) ([]domain.Currency, error) {
 	getRes := domain.Result{}
 
 	response := []domain.Currency{}
@@ -37,7 +37,7 @@ func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *s
 		getRes.Data = response
 		ch <- getRes
 		wg.Done()
-		return &response, err
+		return response, err
 	}
 
 	defer resp.Body.Close()
@@ -53,9 +53,9 @@ func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *s
 	getRes.Data = response
 	ch <- getRes
 	wg.Done()
-	return &response, nil
+	return response, nil
 }
-func (s *apiService) GetCurrencies(currency ...string) (*[]domain.Currency, error) {
+func (s *apiService) GetCurrencies(currency ...string) ([]domain.Currency, error) {
 
 	var (
 		chs = make(chan domain.Result, len(currency))
@@ -72,11 +72,11 @@ func (s *apiService) GetCurrencies(currency ...string) (*[]domain.Currency, erro
 	close(chs)
 	for ch := range chs {
 		if ch.Err != nil {
-			return &[]domain.Currency{}, ch.Err
+			return []domain.Currency{}, ch.Err
 		}
 
 		currencyList = append(currencyList, ch.Data...)
 	}
-	return &currencyList, nil
+	return currencyList, nil
 
 }
