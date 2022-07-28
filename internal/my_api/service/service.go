@@ -42,8 +42,23 @@ func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *s
 
 	defer resp.Body.Close()
 
-	b, _ := ioutil.ReadAll(resp.Body)
-	_ = json.Unmarshal(b, &response)
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		getRes.Err = err
+		getRes.Data = response
+		ch <- getRes
+		wg.Done()
+		return response, err
+	}
+
+	err = json.Unmarshal(b, &response)
+	if err != nil {
+		getRes.Err = err
+		getRes.Data = response
+		ch <- getRes
+		wg.Done()
+		return response, err
+	}
 
 	if len(response) == 0 {
 		errresp := domain.Currency{}
@@ -55,6 +70,7 @@ func (s *apiService) GetCurrency(currency string, ch chan<- domain.Result, wg *s
 	wg.Done()
 	return response, nil
 }
+
 func (s *apiService) GetCurrencies(currency ...string) ([]domain.Currency, error) {
 
 	var (
@@ -66,8 +82,10 @@ func (s *apiService) GetCurrencies(currency ...string) ([]domain.Currency, error
 	currencyList := []domain.Currency{}
 
 	for _, row := range currency {
+		go wg.Done()
 		go s.GetCurrency(row, chs, &wg)
 	}
+
 	wg.Wait()
 	close(chs)
 	for ch := range chs {

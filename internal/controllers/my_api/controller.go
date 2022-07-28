@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/anagiorgiani/onbording-it/internal/my_api/domain"
-	"github.com/anagiorgiani/onbording-it/pkg/web"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,8 +19,8 @@ func NewController(s domain.ApiService) *apiController {
 }
 
 func (c *apiController) Get() gin.HandlerFunc {
+	// retornar diretamente ctx *gin Context
 	return func(ctx *gin.Context) {
-
 		data := ctx.Query("data")
 		fmt.Println("Dados", data)
 		if data == "" {
@@ -42,6 +41,6 @@ func (c *apiController) Get() gin.HandlerFunc {
 			})
 		}
 
-		ctx.JSON(http.StatusOK, web.NewResponse(http.StatusOK, returnData, ""))
+		ctx.JSON(http.StatusOK, returnData)
 	}
 }

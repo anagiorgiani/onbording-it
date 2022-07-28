@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	controller "github.com/anagiorgiani/onbording-it/cmd/server/controllers/my_api"
-	db "github.com/anagiorgiani/onbording-it/db"
+	controller "github.com/anagiorgiani/onbording-it/internal/controllers/my_api"
+	db "github.com/anagiorgiani/onbording-it/internal/db"
 	"github.com/anagiorgiani/onbording-it/internal/my_api/domain"
 	"github.com/anagiorgiani/onbording-it/internal/my_api/repository"
 	"github.com/anagiorgiani/onbording-it/internal/my_api/service"
