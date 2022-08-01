@@ -82,7 +82,7 @@ func (s *apiService) GetCurrencies(currency ...string) ([]domain.Currency, error
 	currencyList := []domain.Currency{}
 
 	for _, row := range currency {
-		go wg.Done()
+		defer wg.Done()
 		go s.GetCurrency(row, chs, &wg)
 	}
 
